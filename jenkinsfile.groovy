@@ -23,7 +23,6 @@ pipeline {
                         ls -lrth
                         chmod 775 script.sh
                         ls -l script.sh
-                        script.sh ${Host_IP}
                         cat script.sh
                         """            
                         }
