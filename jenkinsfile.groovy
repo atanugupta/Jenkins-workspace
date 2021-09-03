@@ -39,7 +39,6 @@ pipeline {
                 sshCommand remote: remote, command: "cat script.sh"
                 sshGet remote: remote, from: 'script.sh', into: 'test_new.sh', override: true
                 sshRemove remote: remote, path: 'script.sh'
-                    }
                 }
             }
         }
