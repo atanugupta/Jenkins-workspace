@@ -1,0 +1,37 @@
+#!/usr/bin/env groovy
+
+pipeline {
+
+   agent any
+
+    parameters {
+       string(name: 'Host_IP', defaultValue: '13.90.247.105',  description: 'Desired Host IP.')
+    }
+
+    options {
+      buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '15'))
+    }
+
+    stages {
+        stage("SSH Steps") {
+            steps {
+                script {
+                sh 'chmod 775 script.sh' 
+            def remote = [:]
+            remote.name = "node"
+            remote.host = "${params.Host_IP}"
+            remote.port = 22
+            remote.allowAnyHosts = true
+            withCredentials([usernamePassword(credentialsId: 'ubuntu_creds', passwordVariable: 'password', usernameVariable: 'userName')]) {
+            remote.user = userName
+            remote.password = password
+                sshPut remote: remote, from: 'script.sh', into: '.'
+                sshCommand remote: remote, command: "cat script.sh"
+                sshGet remote: remote, from: 'script.sh', into: 'test_new.sh', override: true
+                sshRemove remote: remote, path: 'script.sh'
+                    }
+                }
+            }
+        }
+    }
+}
