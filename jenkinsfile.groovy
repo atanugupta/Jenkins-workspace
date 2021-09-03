@@ -21,8 +21,11 @@ pipeline {
                         echo ${Host_IP}
                         pwd
                         ls -lrth
-                        sudo ./script.sh ${Host_IP}
+                        SSH_Script/script.sh ${Host_IP}
+                        ls -l script.sh
                         chmod 775 script.sh
+                        ls -l script.sh
+                        cat script.sh
                         """            
                         }
                     }
