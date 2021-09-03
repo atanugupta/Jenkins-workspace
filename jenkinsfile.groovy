@@ -20,11 +20,16 @@ pipeline {
        }
         stage("Create SH Script") {
             steps {
-                script {
-                    sh """
-                    sudo ./script.sh ${Host_IP}
-                    chmod 775 script.sh
-                    """            
+                dir ("${WORKSPACE}") {
+                    script {
+                        sh """
+                        echo ${Host_IP}
+                        pwd
+                        ls -lrth
+                        sudo ./script.sh ${Host_IP}
+                        chmod 775 script.sh
+                        """            
+                        }
                     }
                 }
             }
@@ -47,5 +52,5 @@ pipeline {
                 }
             }
         }
-    }
+    }   
 }
