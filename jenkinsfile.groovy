@@ -22,7 +22,7 @@ pipeline {
                         pwd
                         ls -lrth
                         chmod 775 script.sh
-                        SSH_Script/script.sh ${Host_IP}
+                        script.sh ${Host_IP}
                         ls -l script.sh
                         cat script.sh
                         """            
