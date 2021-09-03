@@ -16,10 +16,10 @@ pipeline {
         stage("Create SH Script") {
             steps {
                 script {
-                    def script_bash = libraryResource 'Jenkins-workspace/script.sh'
-                    writeFile file: './script.sh', text: script_bash
-                    sh 'chmod 775 script.sh' 
-            
+                    sh """
+                    Jenkins-workspace/script.sh ${Host_IP}
+                    chmod 775 script.sh
+                    """            
                     }
                 }
             }
