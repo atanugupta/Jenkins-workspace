@@ -25,7 +25,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'User_Auth', passwordVariable: 'password', usernameVariable: 'userName')]) {
             remote.user = userName
             remote.password = password
-                sshPut remote: remote, from: 'script.sh', into: '.'
+                sshPut remote: remote, from: '../script.sh', into: '.'
                 sshCommand remote: remote, command: "cat script.sh"
                 sshGet remote: remote, from: 'script.sh', into: 'test_new.sh', override: true
                 sshRemove remote: remote, path: 'script.sh'
