@@ -22,7 +22,7 @@ pipeline {
             remote.host = "${params.Host_IP}"
             remote.port = 22
             remote.allowAnyHosts = true
-            withCredentials([usernamePassword(credentialsId: 'ubuntu_creds', passwordVariable: 'password', usernameVariable: 'userName')]) {
+            withCredentials([usernamePassword(credentialsId: 'User_Auth', passwordVariable: 'password', usernameVariable: 'userName')]) {
             remote.user = userName
             remote.password = password
                 sshPut remote: remote, from: 'script.sh', into: '.'
