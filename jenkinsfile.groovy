@@ -23,7 +23,6 @@ pipeline {
                     }
                 }
             }
-        }
         stage("Execute SH Script") {
             steps {
                 script {
@@ -39,8 +38,12 @@ pipeline {
                 sshCommand remote: remote, command: "cat script.sh"
                 sshGet remote: remote, from: 'script.sh', into: 'test_new.sh', override: true
                 sshRemove remote: remote, path: 'script.sh'
+                    }
                 }
             }
         }
     }
 }
+
+
+ test_jam_automation/scripts/url_check_main.sh ${DEVOPS_NODE} ${JAM_URL} ${TIMEOUT_VALUE}
