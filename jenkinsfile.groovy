@@ -13,10 +13,20 @@ pipeline {
     }
 
     stages {
-        stage("SSH Steps") {
+        stage("Create SH Script") {
             steps {
                 script {
-                sh 'chmod 775 script.sh' 
+                    def script_bash = libraryResource 'Jenkins-workspace/script.sh'
+                    writeFile file: './script.sh', text: script_bash
+                    sh 'chmod 775 script.sh' 
+            
+                    }
+                }
+            }
+        }
+        stage("Execute SH Script") {
+            steps {
+                script {
             def remote = [:]
             remote.name = "node"
             remote.host = "${params.Host_IP}"
@@ -25,7 +35,7 @@ pipeline {
             withCredentials([usernamePassword(credentialsId: 'User_Auth', passwordVariable: 'password', usernameVariable: 'userName')]) {
             remote.user = userName
             remote.password = password
-                sshPut remote: remote, from: '../script.sh', into: '.'
+                sshPut remote: remote, from: 'script.sh', into: '.'
                 sshCommand remote: remote, command: "cat script.sh"
                 sshGet remote: remote, from: 'script.sh', into: 'test_new.sh', override: true
                 sshRemove remote: remote, path: 'script.sh'
