@@ -48,5 +48,10 @@ pipeline {
                 }
             }
         }
+        post { 
+         always { 
+            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '/var/lib/jenkins/workspace/SSH_Script/', reportFiles: 'report.html', reportName: 'Report', reportTitles: ''])
+            }
+        }
     }   
 }
