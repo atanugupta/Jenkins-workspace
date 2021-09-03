@@ -18,12 +18,9 @@ pipeline {
                 dir ("${WORKSPACE}") {
                     script {
                         sh """
-                        echo ${Host_IP}
-                        pwd
-                        ls -lrth
                         chmod 775 script.sh
-                        ls -l script.sh
                         sh script.sh ${Host_IP}
+                        sed -i 's/Host_IP/${Host_IP}/g' script.sh
                         cat script.sh
                         """            
                         }
@@ -43,16 +40,13 @@ pipeline {
             remote.password = password
                 sshPut remote: remote, from: 'script.sh', into: '.'
                 sshCommand remote: remote, command: "cat script.sh"
-                sshGet remote: remote, from: 'script.sh', into: 'test_new.sh', override: true
+                sshCommand remote: remote, command: "bash script.sh > report.html"
+                sshCommand remote: remote, command: "cat report.html"
+                sshGet remote: remote, from: 'report.html', into: 'report.html', override: true
                 sshRemove remote: remote, path: 'script.sh'
                     }
                 }
             }
         }
-        stage ('Clean Workspace') {
-           steps {
-               cleanWs()
-           }
-       }
     }   
 }
