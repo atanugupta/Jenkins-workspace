@@ -13,6 +13,11 @@ pipeline {
     }
 
     stages {
+        stage ('Clean Workspace') {
+           steps {
+               cleanWs()
+           }
+       }
         stage("Create SH Script") {
             steps {
                 script {
