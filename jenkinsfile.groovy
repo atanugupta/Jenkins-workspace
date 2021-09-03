@@ -44,6 +44,3 @@ pipeline {
         }
     }
 }
-
-
- test_jam_automation/scripts/url_check_main.sh ${DEVOPS_NODE} ${JAM_URL} ${TIMEOUT_VALUE}
