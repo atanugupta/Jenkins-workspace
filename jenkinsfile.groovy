@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    Jenkins-workspace/script.sh ${Host_IP}
+                    script.sh ${Host_IP}
                     chmod 775 script.sh
                     """            
                     }
