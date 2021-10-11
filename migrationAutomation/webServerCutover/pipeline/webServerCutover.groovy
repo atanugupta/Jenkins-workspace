@@ -22,16 +22,7 @@ pipeline {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
-          try
-          {
-            {
-              ${env:filePath}/webServerCutover.ps1 "${hostname}" "${username}" "${password}" "${env:serviceName}" "${env:report}"
-            }
-          }
-          catch (Exception e)
-          {
-            echo 'Exception occurred: ' + e.toString()
-          }
+          ${env:filePath}/webServerCutover.ps1 "${hostname}" "${username}" "${password}" "${env:serviceName}" "${env:report}"
         """
       }
     }
