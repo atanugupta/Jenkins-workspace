@@ -1,12 +1,12 @@
 #This script will be used in Jenkins pipeline for stopping services.
 
 #Variables
-$hostname = $args[0]
-$username = $args[1]
-$password = ConvertTo-SecureString $args[2] -AsPlainText -Force
+$hostname = "$args[0]"
+$username = "$args[1]"
+$password = ConvertTo-SecureString "$args[2]" -AsPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential ($username, $password)
-$serviceName = $args[3]
-$report = $args[4]
+$serviceName = "$args[3]"
+$report = "$args[4]"
 
 ## Create Session
 $session = New-PSSession -ComputerName $hostname -Credential $cred
@@ -27,7 +27,7 @@ Write-Host ''
 
 Write-Host '>> START SERVICES <<' -BackgroundColor White -ForegroundColor DarkGreen 
 Write-Host ''
-Invoke-Command -Session  $session -ScriptBlock {Get-Service  was,w3svc}
+Invoke-Command -Session  $session -ScriptBlock {Get-Service  $serviceName}
 Write-Host ''
 Stop-Transcript
 
