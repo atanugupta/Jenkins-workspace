@@ -27,7 +27,7 @@ Write-Host ''
 
 Write-Host '>> START SERVICES <<' -BackgroundColor White -ForegroundColor DarkGreen 
 Write-Host ''
-Invoke-Command -Session $session -ScriptBlock {Get-Service was,w3svc}
+Invoke-Command -Session $session -ScriptBlock {Get-Service $serviceName}
 Write-Host ''
 Stop-Transcript
 
