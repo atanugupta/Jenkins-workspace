@@ -4,9 +4,9 @@
 pipeline {
   agent any
   environment {
-    report = 'webServerCutover_${BUILD_NUMBER}.html'
+    report = 'webServerCutover_${env.BUILD_NUMBER}.txt'
     filePath = 'migrationAutomation/webServerCutover/scripts/powershell'
-    reportfilenamevalue = '*.html'
+    reportfilenamevalue = '*.txt'
 
   }
   parameters {
