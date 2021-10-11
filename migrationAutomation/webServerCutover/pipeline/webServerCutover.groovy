@@ -4,8 +4,9 @@
 pipeline {
   agent any
   environment {
-    report = 'webServerCutover.html'
+    report = 'webServerCutover_${BUILD_NUMBER}.html'
     filePath = 'migrationAutomation/webServerCutover/scripts/powershell'
+    reportfilenamevalue = '*.html'
 
   }
   parameters {
@@ -30,7 +31,7 @@ pipeline {
 
   post { 
     always { 
-      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: WORKSPACE, reportFiles: report, reportName: '*.html', reportTitles: ''])
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: WORKSPACE, reportFiles: report, reportName: reportfilenamevalue, reportTitles: ''])
     }
   }
 }
