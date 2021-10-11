@@ -29,9 +29,9 @@ pipeline {
     }
   }
 
-  // post { 
-  //   always { 
-  //     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: WORKSPACE, reportFiles: report, reportName: reportfilenamevalue, reportTitles: ''])
-  //   }
-  // }
+  post { 
+    always { 
+      publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: WORKSPACE, reportFiles: report, reportName: reportfilenamevalue, reportTitles: ''])
+    }
+  }
 }
