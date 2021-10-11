@@ -22,7 +22,7 @@ pipeline {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
-          ${env:filePath}/webServerCutover.ps1 "${hostname}" "${username}" "${password}" "${env:serviceName}" "${env:report}"
+          ${env:filePath}/webServerCutover.ps1 "${env:hostname}" "${env:username}" "${env:password}" "${env:serviceName}" "${env:report}"
         """
       }
     }
