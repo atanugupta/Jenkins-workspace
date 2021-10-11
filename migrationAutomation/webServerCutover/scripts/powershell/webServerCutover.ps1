@@ -3,7 +3,7 @@
 #Variables
 $hostname = $1
 $user = $2
-$pass = ConvertTo-SecureString $3 -AsPlainText -Force
+$pass = $3
 $cred = New-Object System.Management.Automation.PSCredential ($user, $pass)
 $serviceNames = $4
 $report = $5
