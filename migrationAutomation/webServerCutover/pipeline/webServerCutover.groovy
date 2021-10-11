@@ -23,6 +23,7 @@ pipeline {
       steps {
         powershell script:"""
           ${env:filePath}/webServerCutover.ps1 "${env:hostname}" "${env:username}" "${env:password}" "${env:serviceName}" "${env:report}"
+          echo $?
         """
       }
     }
