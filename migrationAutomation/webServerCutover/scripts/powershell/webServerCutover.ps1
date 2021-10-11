@@ -1,12 +1,12 @@
 #This script will be used in Jenkins pipeline for stopping services.
 
 #Variables
-$hostname = $1
-$username = $2
-$password = $3
+$hostname = $args[0]
+$username = $args[1]
+$password = $args[2]
 $cred = New-Object System.Management.Automation.PSCredential ($username, $password)
-$serviceName = $4
-$report = $5
+$serviceName = $args[3]
+$report = $args[4]
 #Invoke-Command -Session $session -ScriptBlock {Get-Service was,w3svc}
 Start-Transcript -Path "$report"
 
