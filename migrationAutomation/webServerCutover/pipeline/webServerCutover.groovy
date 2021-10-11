@@ -15,7 +15,7 @@ pipeline {
     string(name: 'serviceName', defaultValue: 'was,w3svc',  description: 'Enter service name.')
   }
   options {
-    buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '15'))
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
   }
   stages {
     stage('Start Service') {
@@ -23,7 +23,6 @@ pipeline {
       steps {
         powershell script:"""
           ${filePath}/webServerCutover.ps1 "${env:hostname}" "${username}" "${password}" "$serviceName" "$report"
-          echo $?
         """
       }
     }
