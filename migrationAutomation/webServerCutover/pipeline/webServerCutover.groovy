@@ -23,7 +23,7 @@ pipeline {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
-          migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password "$serviceName" $report
+           migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password "$serviceName" $report
         """
       }
     }
