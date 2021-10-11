@@ -3,7 +3,7 @@
 #Variables
 $hostname = $args[0]
 $username = $args[1]
-$password = $args[2]
+$password = ConvertTo-SecureString $args[2] -AsPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential ($username, $password)
 $serviceName = $args[3]
 $report = $args[4]
