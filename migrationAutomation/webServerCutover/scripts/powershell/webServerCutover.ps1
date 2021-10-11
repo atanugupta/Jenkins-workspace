@@ -9,10 +9,10 @@ $serviceName = "$args[3]"
 $report = "$args[4]"
 
 ## Create Session
-$session = New-PSSession -ComputerName $hostname -Credential $cred
+$session = New-PSSession -ComputerName 10.0.0.185 -Credential $cred
 
 #Invoke-Command -Session $session -ScriptBlock {Get-Service was,w3svc}
-Start-Transcript -Path "$report"
+Start-Transcript -Path $report
 
 Write-Host '>>>> Print Variables <<<<' -BackgroundColor White -ForegroundColor DarkGreen 
 Write-Host ''
