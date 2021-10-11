@@ -6,7 +6,7 @@ pipeline {
   environment {
     report = 'webServerCutover.txt'
     filePath = 'migrationAutomation/webServerCutover/scripts/powershell'
-    reportfilenamevalue = 'webServerCutover.txt'
+    reportfilenamevalue = '*.txt'
 
   }
   parameters {
