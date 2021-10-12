@@ -13,7 +13,7 @@ pipeline {
     string(name: 'hostname', defaultValue: '10.0.0.185',  description: 'Enter hostname or ip.')
     string(name: 'username', defaultValue: 'Administrator',  description: 'Enter username.')
     string(name: 'password', defaultValue: 'fPAgCohVU!',  description: 'Enter passwordword.')
-    string(name: 'serviceName', defaultValue: 'was,w3svc',  description: 'Enter service name.')
+    string(name: 'serviceName', defaultValue: "'was','w3svc'",  description: 'Enter service name.')
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
@@ -23,7 +23,8 @@ pipeline {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
-           migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password "$serviceName" $report
+          # migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password "$serviceName" $report
+          migrationAutomation/webServerCutover/scripts/powershell/test.ps1 $hostname $username $password $serviceName $report
         """
       }
     }
