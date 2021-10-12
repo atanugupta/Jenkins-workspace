@@ -7,9 +7,9 @@ $password = $args[2]
 $database = $args[3]
 $report = $args[4]
 $sqlCmdPath = $args[5]
-#$urlOfEp = $args[6]
-#$oldClusterName = $args[7]
-#$newClusterName = $args[8]
+$urlOfEp = $args[6]
+$oldClusterName = $args[7]
+$newClusterName = $args[8]
 
 #function to check status 
 function statusCheck {
@@ -28,10 +28,12 @@ Write-Host '>> Print Variables <<'
 Write-Host '******************'
 $servername 
 $username
-$password
 $database
 $report
 $sqlCmdPath
+$urlOfEp
+$oldClusterName
+$newClusterName
 Write-Host '******************'
 
 cd $sqlCmdPath
@@ -42,20 +44,16 @@ Write-Host "Query 1:"
 ./SQLCMD.EXE -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "select @@VERSION"
 statusCheck 
 
-# Write-Host "Query 2:"
-# ./SQLCMD.EXE -S "10.0.0.185" -d "testdb" -U "sa" -P "fPAgCohVU!" -W -Q "select @@VERSION"
-# statusCheck 
+Write-Host "Query 2:"
+SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [XPRESSHR_GLOBAL].[dbo].[GlobalConfig] SET Value='$urlOfEp' where [Key]='EmployeePortal.ExternalUrlBase'"
+statusCheck 
 
-#Write-Host "Query 1:"
-#SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [XPRESSHR_GLOBAL].[dbo].[GlobalConfig] SET Value='$urlOfEp' where [Key]='EmployeePortal.ExternalUrlBase'"
-#statusCheck 
-#
-#Write-Host "Query 2:"
-#SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [ONBPREM].[dbo].[Account]  SET [ConnectionString] = REPLACE([ConnectionString],'$oldClusterName','$newClusterName' ) WHERE [ConnectionString] like '%old_cluster_name%'"
-#statusCheck
-#
-#Write-Host "Query 3:"
-#SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [ONBPREM].[dbo].[MasterConfig] SET Value=(SELECT Value FROM [ONBPREM_old].[dbo].[MasterConfig] WHERE [Key]='JobManagementSvcAddressKey') Where [Key]='JobManagementSvcAddressKey'"
-#statusCheck
+Write-Host "Query 3:"
+SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [ONBPREM].[dbo].[Account]  SET [ConnectionString] = REPLACE([ConnectionString],'$oldClusterName','$newClusterName' ) WHERE [ConnectionString] like '%old_cluster_name%'"
+statusCheck
+
+Write-Host "Query 4:"
+SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [ONBPREM].[dbo].[MasterConfig] SET Value=(SELECT Value FROM [ONBPREM_old].[dbo].[MasterConfig] WHERE [Key]='JobManagementSvcAddressKey') Where [Key]='JobManagementSvcAddressKey'"
+statusCheck
 
 Stop-Transcript
