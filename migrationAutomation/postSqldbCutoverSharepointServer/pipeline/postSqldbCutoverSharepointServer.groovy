@@ -4,7 +4,7 @@
 pipeline {
   agent any
   environment {
-    report = 'postSqldbCutoverSharepointServer_${BUILD_NUMBER}.txt'
+    report = 'postSqldbCutoverSharepointServer.txt'
     // pathDir = 'migrationAutomation/postSqldbCutoverSharepointServer/scripts/powershell'
     // allowMissing = 'false'
     // alwaysLinkToLastBuild = 'false'
