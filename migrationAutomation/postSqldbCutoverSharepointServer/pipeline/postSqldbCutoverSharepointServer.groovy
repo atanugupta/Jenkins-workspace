@@ -13,10 +13,10 @@ pipeline {
     // reportFileValue = '*.txt'
   }
   parameters {
-    string(name: 'servername', defaultValue: '',  description: 'Enter SQL servername.')
-    string(name: 'username', defaultValue: '',  description: 'Enter database username.')
-    string(name: 'password', defaultValue: '',  description: 'Enter database password.')
-    string(name: 'database', defaultValue: '',  description: 'Enter database name.')    
+    string(name: 'servername', defaultValue: '10.0.0.185',  description: 'Enter SQL servername.')
+    string(name: 'username', defaultValue: 'sa',  description: 'Enter database username.')
+    string(name: 'password', defaultValue: 'fPAgCohVU!',  description: 'Enter database password.')
+    string(name: 'database', defaultValue: 'testdb',  description: 'Enter database name.')    
     // string(name: 'urlOfEp', defaultValue: '',  description: 'Enter live URL of EP.') 
     // string(name: 'oldClusterName', defaultValue: '',  description: 'Enter old cluster name.') 
     // string(name: 'newClusterName', defaultValue: '',  description: 'Enter new cluster name.') 
