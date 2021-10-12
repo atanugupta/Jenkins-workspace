@@ -10,7 +10,6 @@ $database = "$args[3]"
 #$newClusterName = "$args[6]"
 $report = "$args[4]"
 
-
 #function to check status 
 function statusCheck {
   if ( $? -eq "True" ) {
@@ -22,9 +21,19 @@ function statusCheck {
   }
 }
 
-cd "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn"
-
 Start-Transcript -Path $report
+Write-Host '>> Print Variables <<' 
+Write-Host ''
+echo $servername
+echo $username
+echo $password
+echo $database
+echo $report
+
+cd "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn"
+dir
+
+Write-Host '>> DB Query Result <<'  
 
 Write-Host "Query 1:"
 SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "select @@VERSION"
