@@ -8,7 +8,7 @@ $database = $args[3]
 #$urlOfEp = "$args[4]"
 #$oldClusterName = "$args[5]"
 #$newClusterName = "$args[6]"
-$report = "$args[4]"
+$report = $args[4]
 
 #function to check status 
 function statusCheck {
@@ -37,13 +37,13 @@ dir
 
 Write-Host '>> DB Query Result <<'  
 
-# Write-Host "Query 1:"
-# ./SQLCMD.EXE -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "select @@VERSION"
-# statusCheck 
-
-Write-Host "Query 2:"
-./SQLCMD.EXE -S "10.0.0.185" -d "testdb" -U "sa" -P "fPAgCohVU!" -W -Q "select @@VERSION"
+Write-Host "Query 1:"
+./SQLCMD.EXE -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "select @@VERSION"
 statusCheck 
+
+# Write-Host "Query 2:"
+# ./SQLCMD.EXE -S "10.0.0.185" -d "testdb" -U "sa" -P "fPAgCohVU!" -W -Q "select @@VERSION"
+# statusCheck 
 
 #Write-Host "Query 1:"
 #SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "UPDATE [XPRESSHR_GLOBAL].[dbo].[GlobalConfig] SET Value='$urlOfEp' where [Key]='EmployeePortal.ExternalUrlBase'"
