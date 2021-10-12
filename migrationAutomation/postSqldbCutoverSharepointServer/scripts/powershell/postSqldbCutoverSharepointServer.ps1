@@ -30,6 +30,7 @@ echo $username
 echo $password
 echo $database
 echo $report
+Write-Host ''
 
 cd "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn"
 dir
