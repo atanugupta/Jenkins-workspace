@@ -63,10 +63,11 @@ pipeline {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
+        cd $pathDir
           try
           {
             {
-             $pathDir/postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report
+             ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report
             }
           }
           catch (Exception e)
