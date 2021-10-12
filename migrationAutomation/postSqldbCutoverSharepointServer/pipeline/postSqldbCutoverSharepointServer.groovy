@@ -4,7 +4,7 @@
 pipeline {
   agent any
   environment {
-    report = 'postSqldbCutoverSharepointServer.txt'
+    report = "postSqldbCutoverSharepointServer_${BUILD_NUMBER}.txt"
     sqlCmdPath = 'C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn'
     pathDir = 'migrationAutomation/postSqldbCutoverSharepointServer/scripts/powershell'
   }
@@ -40,15 +40,14 @@ pipeline {
       steps {
         script {
           props = readProperties file : "migrationAutomation/postSqldbCutoverSharepointServer/pipeline/config.properties"
-          // pathDir = props['pathDir']
+          pathDir = props['pathDir']
           reportFileValue = props['reportFileValue']
           allowMissingValue = props['allowMissingValue']
           alwaysLinkToLastBuildValue = props['alwaysLinkToLastBuildValue']
           keepAllValue = props['keepAllValue']
           reportNameValue = props['reportNameValue']
 
-          // println "setting properties values pathDir = " + pathDir
-          // println "setting properties values sqlCmdPath = " + sqlCmdPath
+          println "setting properties values pathDir = " + pathDir
           println "setting properties values allowMissingValue = " + allowMissingValue
           println "setting properties values alwaysLinkToLastBuildValue = " + alwaysLinkToLastBuildValue
           println "setting properties values keepAllValue = " + keepAllValue
