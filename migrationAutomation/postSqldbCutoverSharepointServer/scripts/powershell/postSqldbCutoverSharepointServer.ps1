@@ -24,12 +24,13 @@ function statusCheck {
 Start-Transcript -Path report.txt
 
 Write-Host '>> Print Variables <<' 
-$servername
-Write-Host "echo $username"
-echo $password
-echo $database
-echo $report
-Write-Host ''
+Write-Host '******************'
+$servername -NoNewline
+$username
+$password
+$database
+$report
+Write-Host '******************'
 
 cd "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn"
 dir
