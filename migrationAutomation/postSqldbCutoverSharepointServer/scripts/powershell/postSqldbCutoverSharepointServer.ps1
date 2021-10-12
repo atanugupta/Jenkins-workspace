@@ -2,9 +2,9 @@
 
 #VARIABLES
 $servername = $args[0]
-# $username = "$args[1]"
-# $password = "$args[2]"
-# $database = "$args[3]"
+$username = $args[1]
+$password = $args[2]
+$database = $args[3]
 #$urlOfEp = "$args[4]"
 #$oldClusterName = "$args[5]"
 #$newClusterName = "$args[6]"
@@ -26,10 +26,10 @@ Start-Transcript -Path report.txt
 Write-Host '>> Print Variables <<' 
 Write-Host '******************'
 $servername 
-# $username
-# $password
-# $database
-# $report
+$username
+$password
+$database
+$report
 Write-Host '******************'
 
 cd "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn"
