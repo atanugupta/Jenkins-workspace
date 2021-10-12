@@ -6,7 +6,7 @@ pipeline {
   environment {
     report = 'webServerCutover.txt'
     filePath = 'migrationAutomation/webServerCutover/scripts/powershell'
-    reportfilenamevalue = '*.txt'
+    reportfilenamevalue = 'webServerCutover.txt'
 
   }
   parameters {
@@ -23,8 +23,7 @@ pipeline {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
-          # migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password "$serviceName" $report
-          migrationAutomation/webServerCutover/scripts/powershell/test.ps1 $hostname $username $password $serviceName $report
+           migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password $serviceName $report
         """
       }
     }
