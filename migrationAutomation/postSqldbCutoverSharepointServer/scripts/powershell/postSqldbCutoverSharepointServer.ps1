@@ -1,14 +1,14 @@
 #This script will be used in Jenkins pipeline for stopping services.
 
 #VARIABLES
-$servername = $1
-$username = $2
-$password = $3
-$database = $4
-#$urlOfEp = $5
-#$oldClusterName = $6
-#$newClusterName = $7
-$report = $8
+$servername = "$args[0]"
+$username = "$args[1]"
+$password = "$args[2]"
+$database = "$args[3]"
+#$urlOfEp = "$args[4]"
+#$oldClusterName = "$args[5]"
+#$newClusterName = "$args[6]"
+$report = "$args[4]"
 
 
 #function to check status 

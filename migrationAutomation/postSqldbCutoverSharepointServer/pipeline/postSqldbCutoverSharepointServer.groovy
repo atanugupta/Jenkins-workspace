@@ -64,16 +64,7 @@ pipeline {
       steps {
         powershell script:"""
         cd $pathDir
-          try
-          {
-            {
-             ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report
-            }
-          }
-          catch (Exception e)
-          {
-            echo 'Exception occurred: ' + e.toString()
-          }
+        ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report
         """
       }
     }
