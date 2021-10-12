@@ -21,7 +21,7 @@ function statusCheck {
   }
 }
 
-Start-Transcript -Path report.txt
+Start-Transcript -Path $report
 
 Write-Host '>> Print Variables <<' 
 Write-Host '******************'
@@ -42,7 +42,7 @@ Write-Host '>> DB Query Result <<'
 # statusCheck 
 
 Write-Host "Query 2:"
-./SQLCMD.EXE -S "10.0.0.185" -d "testdb" -U "sa" -P "fPAgCohVU!" -W -Q "select @@VERSION"
+./SQLCMD.EXE -S "10.0.0.185" -d "testdb" -U "sa" -P "$password" -W -Q "select @@VERSION"
 statusCheck 
 
 #Write-Host "Query 1:"
