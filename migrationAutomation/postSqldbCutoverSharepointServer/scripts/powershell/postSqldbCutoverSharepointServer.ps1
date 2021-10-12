@@ -24,8 +24,8 @@ function statusCheck {
 Start-Transcript -Path report.txt
 
 Write-Host '>> Print Variables <<' 
-Write-Host 'echo $servername'
-Write-Host 'echo $username'
+Write-Host "echo $servername"
+Write-Host "echo $username"
 echo $password
 echo $database
 echo $report
