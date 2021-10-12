@@ -1,10 +1,10 @@
 #This script will be used in Jenkins pipeline for stopping services.
 
 #VARIABLES
-$servername = "$args[0]"
-$username = "$args[1]"
-$password = "$args[2]"
-$database = "$args[3]"
+$servername = $args[0]
+# $username = "$args[1]"
+# $password = "$args[2]"
+# $database = "$args[3]"
 #$urlOfEp = "$args[4]"
 #$oldClusterName = "$args[5]"
 #$newClusterName = "$args[6]"
