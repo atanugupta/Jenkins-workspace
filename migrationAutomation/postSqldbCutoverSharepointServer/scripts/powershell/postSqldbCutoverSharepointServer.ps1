@@ -37,7 +37,7 @@ dir
 Write-Host '>> DB Query Result <<'  
 
 Write-Host "Query 1:"
-SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "select @@VERSION"
+./SQLCMD.exe -S "$servername" -d "$database" -U "$username" -P "$password" -W -Q "select @@VERSION"
 statusCheck 
 
 #Write-Host "Query 1:"
