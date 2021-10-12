@@ -9,7 +9,7 @@ $serviceName = "$args[3]"
 $report = "$args[4]"
 
 ## Create Session
-$session = New-PSSession -ComputerName $hostname -Credential $cred
+#$session = New-PSSession -ComputerName $hostname -Credential $cred
 
 Start-Transcript -Path $report
 
@@ -26,6 +26,6 @@ Write-Host ''
 
 Write-Host '>> START SERVICES <<' -BackgroundColor White -ForegroundColor DarkGreen 
 Write-Host ''
-Invoke-Command -Session  $session -ScriptBlock {Get-Service  ${using:serviceName}}
+#Invoke-Command -Session  $session -ScriptBlock {Get-Service  ${using:serviceName}}
 Write-Host ''
 Stop-Transcript
