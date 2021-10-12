@@ -59,14 +59,14 @@ pipeline {
       }
     }
 
-    stage('Start Service') {
+    stage('SQL DB Query Execution') {
       // Starting Services on Windows Server
       steps {
         powershell script:"""
           try
           {
             {
-             $pathDir/postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $urlOfEp $oldClusterName $newClusterName $report
+             $pathDir/postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report
             }
           }
           catch (Exception e)
