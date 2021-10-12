@@ -21,7 +21,7 @@ function statusCheck {
   }
 }
 
-Start-Transcript -Path $report
+Start-Transcript -Path report.txt
 
 Write-Host '>> Print Variables <<' 
 Write-Host '******************'
