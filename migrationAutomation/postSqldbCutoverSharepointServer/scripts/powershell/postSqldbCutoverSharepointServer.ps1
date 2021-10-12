@@ -5,10 +5,11 @@ $servername = $args[0]
 $username = $args[1]
 $password = $args[2]
 $database = $args[3]
-#$urlOfEp = "$args[4]"
-#$oldClusterName = "$args[5]"
-#$newClusterName = "$args[6]"
 $report = $args[4]
+$sqlCmdPath = $args[5]
+#$urlOfEp = $args[6]
+#$oldClusterName = $args[7]
+#$newClusterName = $args[8]
 
 #function to check status 
 function statusCheck {
@@ -30,10 +31,10 @@ $username
 $password
 $database
 $report
+$sqlCmdPath
 Write-Host '******************'
 
-cd "C:/Program Files/Microsoft SQL Server/Client SDK/ODBC/110/Tools/Binn"
-dir
+cd $sqlCmdPath
 
 Write-Host '>> DB Query Result <<'  
 

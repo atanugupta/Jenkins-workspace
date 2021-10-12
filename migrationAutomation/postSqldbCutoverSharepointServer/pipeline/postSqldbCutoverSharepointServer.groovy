@@ -5,17 +5,11 @@ pipeline {
   agent any
   environment {
     report = 'postSqldbCutoverSharepointServer.txt'
-    // pathDir = 'migrationAutomation/postSqldbCutoverSharepointServer/scripts/powershell'
-    // allowMissing = 'false'
-    // alwaysLinkToLastBuild = 'false'
-    // keepAllValue = 'false'
-    // reportNameValue = 'postSqldbCutoverSharepointServer'
-    // reportFileValue = '*.txt'
   }
   parameters {
     string(name: 'servername', defaultValue: '10.0.0.185',  description: 'Enter SQL servername.')
     string(name: 'username', defaultValue: 'sa',  description: 'Enter database username.')
-    string(name: 'password', defaultValue: 'fPAgCohVU!',  description: 'Enter database password.')
+    password(name: 'password', defaultValue: 'fPAgCohVU!',  description: 'Enter database password.')
     string(name: 'database', defaultValue: 'testdb',  description: 'Enter database name.')    
     // string(name: 'urlOfEp', defaultValue: '',  description: 'Enter live URL of EP.') 
     // string(name: 'oldClusterName', defaultValue: '',  description: 'Enter old cluster name.') 
@@ -29,9 +23,11 @@ pipeline {
       steps {
         script {
           params.each { param ->
-            if (param.value.trim().isEmpty() || param.value.contains(' ')) {
-            println param.key + " value is invalid. It is either empty or has space. Please provide correct value and rebuild the job. value=" + param.value
-            sh 'exit 1'
+            if (param.value instanceof String) {
+              if (param.value.trim().isEmpty() || param.value.contains(' ')) {
+              println param.key + " value is invalid. It is either empty or has space. Please provide correct value and rebuild the job. value=" + param.value
+              sh 'exit 1'
+              }
             }
           }
         }
@@ -43,13 +39,14 @@ pipeline {
         script {
           props = readProperties file : "migrationAutomation/postSqldbCutoverSharepointServer/pipeline/config.properties"
           pathDir = props['pathDir']
+          reportFileValue = props['sqlCmdPath']
           allowMissingValue = props['allowMissingValue']
           alwaysLinkToLastBuildValue = props['alwaysLinkToLastBuildValue']
           keepAllValue = props['keepAllValue']
           reportNameValue = props['reportNameValue']
-          reportFileValue = props['reportFileValue']
 
-          println "setting properties values pathDir = " + pathDir 
+          println "setting properties values pathDir = " + pathDir
+          println "setting properties values sqlCmdPath = " + sqlCmdPath
           println "setting properties values allowMissingValue = " + allowMissingValue
           println "setting properties values alwaysLinkToLastBuildValue = " + alwaysLinkToLastBuildValue
           println "setting properties values keepAllValue = " + keepAllValue
@@ -64,7 +61,7 @@ pipeline {
       steps {
         powershell script:"""
         cd $pathDir
-        ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report
+        ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report $sqlCmdPath
         """
       }
     }
