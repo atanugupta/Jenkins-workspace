@@ -25,7 +25,7 @@ Start-Transcript -Path report.txt
 
 Write-Host '>> Print Variables <<' 
 Write-Host '******************'
-$servername -NoNewline
+$servername 
 $username
 $password
 $database
