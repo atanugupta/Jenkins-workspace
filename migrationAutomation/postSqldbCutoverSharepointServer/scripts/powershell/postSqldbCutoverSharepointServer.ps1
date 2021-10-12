@@ -10,6 +10,7 @@ $sqlCmdPath = $args[5]
 $urlOfEp = $args[6]
 $oldClusterName = $args[7]
 $newClusterName = $args[8]
+$workspace = $args[9]
 
 #function to check status 
 function statusCheck {
@@ -22,7 +23,7 @@ function statusCheck {
   }
 }
 
-Start-Transcript -Path $report
+Start-Transcript -Path $workspace/$report
 
 Write-Host '>> Print Variables <<' 
 Write-Host '******************'
@@ -34,6 +35,7 @@ $sqlCmdPath
 $urlOfEp
 $oldClusterName
 $newClusterName
+$workspace
 Write-Host '******************'
 
 cd $sqlCmdPath
