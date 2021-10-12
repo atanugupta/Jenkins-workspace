@@ -63,7 +63,7 @@ pipeline {
       steps {
         powershell script:"""
         cd $pathDir
-        ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report $sqlCmdPath
+        ./postSqldbCutoverSharepointServer.ps1 $servername $username $password $database $report "$sqlCmdPath"
         """
       }
     }
