@@ -13,9 +13,9 @@ pipeline {
     string(name: 'username', defaultValue: 'sa',  description: 'Enter database username.')
     password(name: 'password', defaultValue: 'fPAgCohVU!',  description: 'Enter database password.')
     string(name: 'database', defaultValue: 'testdb',  description: 'Enter database name.')    
-    // string(name: 'urlOfEp', defaultValue: '',  description: 'Enter live URL of EP.') 
-    // string(name: 'oldClusterName', defaultValue: '',  description: 'Enter old cluster name.') 
-    // string(name: 'newClusterName', defaultValue: '',  description: 'Enter new cluster name.') 
+    string(name: 'urlOfEp', defaultValue: '',  description: 'Enter live URL of EP.') 
+    string(name: 'oldClusterName', defaultValue: '',  description: 'Enter old cluster name.') 
+    string(name: 'newClusterName', defaultValue: '',  description: 'Enter new cluster name.') 
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '15'))
