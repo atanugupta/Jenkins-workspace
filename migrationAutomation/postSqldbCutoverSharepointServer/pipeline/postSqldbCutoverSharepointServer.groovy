@@ -1,26 +1,25 @@
 //This should be run on windows agent
 //This script will executesome database query on prod db server
 
-def pathDir
-def allowMissingValue
-def alwaysLinkToLastBuildValue
-def keepAllValue
-def reportNameValue
-def reportFileValue
-
 pipeline {
   agent any
   environment {
     report = 'postSqldbCutoverSharepointServer_${BUILD_NUMBER}.txt'
+    // pathDir = 'migrationAutomation/postSqldbCutoverSharepointServer/scripts/powershell'
+    // allowMissing = 'false'
+    // alwaysLinkToLastBuild = 'false'
+    // keepAllValue = 'false'
+    // reportNameValue = 'postSqldbCutoverSharepointServer'
+    // reportFileValue = '*.txt'
   }
   parameters {
     string(name: 'servername', defaultValue: '',  description: 'Enter SQL servername.')
     string(name: 'username', defaultValue: '',  description: 'Enter database username.')
     string(name: 'password', defaultValue: '',  description: 'Enter database password.')
     string(name: 'database', defaultValue: '',  description: 'Enter database name.')    
-    string(name: 'urlOfEp', defaultValue: '',  description: 'Enter live URL of EP.') 
-    string(name: 'oldClusterName', defaultValue: '',  description: 'Enter old cluster name.') 
-    string(name: 'newClusterName', defaultValue: '',  description: 'Enter new cluster name.') 
+    // string(name: 'urlOfEp', defaultValue: '',  description: 'Enter live URL of EP.') 
+    // string(name: 'oldClusterName', defaultValue: '',  description: 'Enter old cluster name.') 
+    // string(name: 'newClusterName', defaultValue: '',  description: 'Enter new cluster name.') 
   }
   options {
     buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '15'))
@@ -42,7 +41,7 @@ pipeline {
     stage('Load Configuration Properties') {
       steps {
         script {
-          props = readProperties file : "$WORKSPACE/migrationAutomation/disableElasticSearch/pipeline/config.properties"
+          props = readProperties file : "migrationAutomation/postSqldbCutoverSharepointServer/pipeline/config.properties"
           pathDir = props['pathDir']
           allowMissingValue = props['allowMissingValue']
           alwaysLinkToLastBuildValue = props['alwaysLinkToLastBuildValue']
