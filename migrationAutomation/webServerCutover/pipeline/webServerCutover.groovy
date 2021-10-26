@@ -19,8 +19,23 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
   }
   stages {
+    
+    stage('Verify Input Parameters') {
+      steps {
+        script {
+          params.each { param ->
+            if (param.value instanceof String) {​​
+              if (param.value.trim().isEmpty() || param.value.contains(' ')) {
+              println param.key + " value is invalid. It is either empty or has space. Please provide correct value and rebuild the job. value=" + param.value
+              sh 'exit 1'
+              }
+            }
+          }
+        }
+      }
+    }
+    
     stage('Start Service') {
-      // Starting Services on Windows Server
       steps {
         powershell script:"""
            migrationAutomation/webServerCutover/scripts/powershell/webServerCutover.ps1 $hostname $username $password $serviceName $report
