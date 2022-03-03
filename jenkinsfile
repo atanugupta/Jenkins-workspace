@@ -1,0 +1,63 @@
+pipeline {
+  agent any
+  parameters {
+    string(name: 'hostname', defaultValue: '',  description: 'Multiple hostname/IP are accepted with comma separated values. For eg:- 10.0.0.0,10.0.0.1')
+    string(name: 'username', defaultValue: '',  description: 'Desired User Name.')
+    string(name: 'password', defaultValue: '',  description: 'Desired Password.')
+    string(name: 'serviceName', defaultValue: '',  description: 'Multiple service names are accepted with comma separated values. For eg:- SFJobService,WSTService')
+    string(name: 'taskScheduler', defaultValue: '',  description: 'Multiple task scheduler are accepted with comma separated values. For eg:- AT1,AT1')
+  }
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '15', artifactNumToKeepStr: '15'))
+  }
+
+  stages
+  {
+    stage('Start Services on Windows') {
+    // Starting Services on Windows Server
+      steps
+      {
+        powershell script: '''
+          try
+          {
+            dir("${WORKSPACE}/startServices/scripts/powershell/")
+            {
+              ./windowsStartServices.ps1 $hostname $username $password $serviceName $taskScheduler
+            }
+          }
+          catch (Exception e)
+          {
+            echo 'Exception occurred: ' + e.toString()
+          }
+        '''
+      }
+    }
+    stage('Start Services on Linux')
+    {
+      // Starting Services on Linux Server //
+      steps 
+      {
+        sh '''
+          chmod 755 startServices/scripts/shell/linuxStartServices.sh
+          startServices/scripts/shell/linuxStartServices.sh $hostname $serverUser $serviceName
+        '''
+      }
+    }
+  }
+  post
+  {
+    always
+    {
+      publishHTML([
+        allowMissing: false,
+        alwaysLinkToLastBuild: false,
+        keepAll: false,
+        reportDir: '${WORKSPACE}',
+        reportFiles: '*.txt',
+        reportName: 'WFA Start Service Report',
+        reportTitles: ''
+      ])
+    }
+  }
+}
